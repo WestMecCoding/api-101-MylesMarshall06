@@ -7,7 +7,22 @@
     <title></title>
 </head>
 <body>
-    
-    <script src="index.js"></script>
+    <h1>heading</h1>
+
+    <script>
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("GET", "http://localhost:3000/data", true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const data = xhr.responseText;
+                console.log("data", data)
+            } else {
+                console.log("Error", xhr.statusText)
+            };
+        };
+
+        xhr.send();
+    </script>
 </body>
 </html>
