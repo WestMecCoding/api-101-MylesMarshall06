@@ -13,9 +13,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/data", (req, res) => {
-    const csvPath = path.join(__dirname, "..", "data", "zonal_sea_averages.csv");
+    const tempsPath = path.join(__dirname, "..", "data", "zonal_sea_averages.csv");
+    // const hurricanesPath = path.join(__dirname, "..", "data", "hurricanes.csv");
     
-    fs.readFile(csvPath, "utf8", (err, data) => {
+    fs.readFile(tempsPath, "utf8", (err, data) => {
         if (err) {
             console.error(err);
             return;
