@@ -22,7 +22,8 @@
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     let data = xhr.responseText;
                     const globalTemps = processData(data);
-                    cl(globalTemps)
+                    renderChart(globalTemps);
+                    // cl(globalTemps)
                 } else {
                     cl("Error", xhr.statusText)
                 };
@@ -46,6 +47,10 @@
 
             return { years, temps }
         }
+
+        function renderChart(data) {
+            
+        };
     </script>
 </body>
 </html>
