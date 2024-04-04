@@ -10,6 +10,8 @@
     <h1>heading</h1>
 
     <script>
+        let cl = console.log;
+
         window.addEventListener("load", fetchData);
 
         function fetchData() {
@@ -20,8 +22,9 @@
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     let data = xhr.responseText;
                     const globalTemps = processData(data);
+                    cl(globalTemps)
                 } else {
-                    console.log("Error", xhr.statusText)
+                    cl("Error", xhr.statusText)
                 };
             };
             
@@ -31,9 +34,17 @@
         function processData(data) {
             const years = [];
             const temps = [];
-            
-            data = data.split("\n").slice(1);
-            console.log(data[0])
+
+            rows = data.split("\n").slice(1);
+            // cl(rows[0])
+            rows.forEach(row => {
+                const cols = row.split(",")
+                years.push(cols[0]);
+                temps.push(14 + parseFloat(cols[1]))
+                // cl(cols[0]);
+            });
+
+            return { years, temps }
         }
     </script>
 </body>
