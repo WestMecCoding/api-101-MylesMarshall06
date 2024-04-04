@@ -1,9 +1,9 @@
 const express = require("express");
 const path = require("path");
-// const cors = require("cors");
+const cors = require("cors");
 const fs = require("fs");
 const app = express();
-// app.use(cors)
+app.use(cors())
 const port = 3000;
 
 app.get("/", (req, res) => {
