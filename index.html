@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Global Average Temperatures 1880 - 2023</h1>
+    <h1>Hurricane and Tropical Storm counts</h1>
     <canvas id="myChart" width="400" height="200"></canvas>
 
 
@@ -25,8 +25,8 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     let data = xhr.responseText;
-                    const globalTemps = processData(data);
-                    renderChart(globalTemps);
+                    const stormData = processData(data);
+                    renderChart(stormData);
                     // cl(globalTemps)
                 } else {
                     cl("Error", xhr.statusText)
@@ -37,19 +37,19 @@
         }
         
         function processData(data) {
-            const years = [];
-            const temps = [];
+            const months = [];
+            const storms = [];
 
             rows = data.split("\n").slice(1);
             // cl(rows[0])
             rows.forEach(row => {
                 const cols = row.split(",")
-                years.push(cols[0]);
-                temps.push(14 + parseFloat(cols[1]))
+                months.push(cols[0]);
+                storms.push(parseFloat(cols[1]))
                 // cl(cols[0]);
             });
 
-            return { years, temps }
+            return { months, storms }
         }
 
         function renderChart(data) {
@@ -59,10 +59,10 @@
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: data.years,
+                    labels: data.months,
                     datasets: [{
-                        label: 'Temperature in Celsius',
-                        data: data.temps,
+                        label: 'Hurricane and Tropical Storm counts per month',
+                        data: data.storms,
                         fill: false,
                         borderWidth: 1,
                         borderColor: 'rgba(255, 199, 132, 1)',
